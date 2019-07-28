@@ -1,0 +1,50 @@
+{
+    "name": "env-typescript-node",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "dev": "nodemon src/index.ts",
+        "build": "sucrase ./src -d ./dist --transforms typescript,imports",
+        "test": "jest --watchAll"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.5.5",
+        "@babel/preset-typescript": "^7.3.3",
+        "@types/bcryptjs": "^2.4.2",
+        "@types/cors": "^2.8.5",
+        "@types/jest": "^24.0.15",
+        "@types/jwt-simple": "^0.5.33",
+        "@types/knex": "^0.16.1",
+        "@types/pg": "^7.4.14",
+        "@typescript-eslint/eslint-plugin": "^1.5.0",
+        "@typescript-eslint/parser": "^1.5.0",
+        "eslint": "^5.15.3",
+        "eslint-config-prettier": "^4.1.0",
+        "eslint-config-standard": "^12.0.0",
+        "eslint-plugin-import": "^2.16.0",
+        "eslint-plugin-node": "^8.0.1",
+        "eslint-plugin-prettier": "^3.0.1",
+        "eslint-plugin-promise": "^4.0.1",
+        "eslint-plugin-standard": "^4.0.0",
+        "jest": "^24.8.0",
+        "nodemon": "^1.19.1",
+        "prettier": "^1.16.4",
+        "sucrase": "^3.10.0",
+        "supertest": "^4.0.2",
+        "typescript": "^3.3.4000"
+    },
+    "dependencies": {
+        "@types/express": "^4.17.0",
+        "@types/faker": "^4.1.5",
+        "@types/supertest": "^2.0.8",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "faker": "^4.1.0",
+        "jwt-simple": "^0.5.6",
+        "knex": "^0.19.1",
+        "pg": "^7.12.0"
+    }
+}
