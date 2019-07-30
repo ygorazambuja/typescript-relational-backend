@@ -1,8 +1,12 @@
 import { Request, Response } from 'express'
 import { compareSync } from 'bcryptjs'
-import { encode, decode } from 'jwt-simple'
+import { encode } from 'jwt-simple'
 import knexInstance from '../configs/db'
-const { authSecret } = require('../../.env')
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
+const authSecret = process.env.AUTH_SECRET
 
 export async function signin (req: Request, res: Response) {
   const { email, password } = req.body

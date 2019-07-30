@@ -12,3 +12,5 @@ export const up = (knex: any, promise: Promise<any>) => {
 export const down = (knex: any, promise: Promise<any>) => {
   return knex.dropTable('pessoas')
 }
+
+// 7vDQuVEA5sGn

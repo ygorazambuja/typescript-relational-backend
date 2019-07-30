@@ -1,7 +1,7 @@
 import request from 'supertest'
 import { decode } from 'jwt-simple'
-import { authSecret } from '../.env'
 import * as faker from 'faker'
+const authSecret = process.env.AUTH_SECRET
 
 const URL_PADRAO = 'http://localhost:3000'
 
