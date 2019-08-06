@@ -1,7 +1,6 @@
 // Update with your config settings.
-import * as knex from 'knex'
 
-const database = {
+export default {
   client: 'postgresql',
   connection: {
     database: 'empatia',
@@ -15,6 +14,4 @@ const database = {
   migrations: {
     tableName: 'knex_migrations'
   }
-} as knex.Config
-
-export default database
+}

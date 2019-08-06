@@ -1,16 +1,18 @@
-export const up = (knex: any, promise: Promise<any>) => {
+import * as Knex from 'knex'
+
+export async function up (knex: Knex): Promise<any> {
   return knex.schema.createTable('pessoas', table => {
     table.increments('id').primary()
-    table.string('nome').notNull()
+    table.string('nome').notNullable()
     table
       .string('email')
-      .notNull()
+      .notNullable()
       .unique()
-    table.string('password').notNull()
+    table.string('password').notNullable()
   })
 }
-export const down = (knex: any, promise: Promise<any>) => {
-  return knex.dropTable('pessoas')
+export async function down (knex: Knex): Promise<any> {
+  return knex.schema.dropTable('pessoas')
 }
 
 // 7vDQuVEA5sGn

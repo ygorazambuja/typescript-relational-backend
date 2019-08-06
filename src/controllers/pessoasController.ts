@@ -1,6 +1,7 @@
-import { Request, Response } from 'express'
+import { Request, Response, response } from 'express'
 import { genSaltSync, hashSync } from 'bcryptjs'
 import knexInstance from '../configs/db'
+import * as Knex from 'knex'
 
 const encryptPassword = password => {
   return hashSync(password, genSaltSync(10))
@@ -37,19 +38,16 @@ export async function BuscaTodos (request: Request, response: Response) {
 
   return response.status(200).send(pessoas)
 }
-export async function Remove (request: Request, response: Response) {
-  const id = Number.parseInt(request.params.id)
-  if (!id) return response.status(400).send({ error: 'Requisição Invalida' })
+export async function remove (request: Request, response: Response) {
+  const { id } = request.params
 
-  try {
-    const linhaDeletada = await knexInstance('pessoas')
-      .where({ id: id })
-      .del()
+  const linhasDeletadas = await knexInstance('pessoas')
+    .where({ id: id })
+    .del()
 
-    if (!linhaDeletada) {
-      return response.status(400).send({ error: 'Requisição Invalida' })
-    }
-
+  if (linhasDeletadas) {
     return response.status(204).send({})
-  } catch (error) {}
+  } else {
+    return response.status(400).send({})
+  }
 }
