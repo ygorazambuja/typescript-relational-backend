@@ -16,5 +16,13 @@ describe('Teste com Comentarios', () => {
     expect(response.status).toBe(204)
     expect(response.noContent).toBe(true)
   })
-  it('deveria pegar todos os comentarios do post', () => {})
+  it('deveria pegar todos os comentarios do post', async () => {
+    const postId = Math.floor(Math.random() * (3000 - 0))
+
+    const response = await request(URL_PADRAO).get(
+      `/posts/${postId}/comentarios`
+    )
+    expect(response.body).toBeInstanceOf(Array)
+    expect(response.status).not.toBe(400)
+  })
 })
