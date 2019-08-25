@@ -8,7 +8,7 @@ dotenv.config()
 
 const authSecret = process.env.AUTH_SECRET
 
-export async function signin (req: Request, res: Response) {
+export async function signin (req: Request, res: Response, next) {
   const { email, password } = req.body
 
   const pessoa = await knexInstance('pessoas')
@@ -36,4 +36,5 @@ export async function signin (req: Request, res: Response) {
     ...payload,
     token: encode(payload, authSecret)
   })
+  next()
 }

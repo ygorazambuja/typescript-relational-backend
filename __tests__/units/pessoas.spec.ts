@@ -35,7 +35,7 @@ describe('Pessoas', () => {
     expect(response.body.length).toBeGreaterThan(100)
   })
 
-  it('deveria criar um usuario novo', async () => {
+  it('deveria criar um usuario novo', async done => {
     const result = await request(URL_PADRAO)
       .post('/signup')
       .send(usuarioFake)
@@ -43,8 +43,9 @@ describe('Pessoas', () => {
     expect(result.body.nome).toBe(usuarioFake.nome)
     expect(result.body.email).toBe(usuarioFake.email)
     expect(result.body.password).not.toBe(usuarioFake.password)
+    done()
   })
-  it('deveria retornar um usuario invalido e sem autorização', async () => {
+  it('deveria retornar um usuario invalido e sem autorização', async done => {
     let usuarioInvalido = usuarioFake
     usuarioInvalido.password = 'algumaSenhaInvalida'
     const result = await request(URL_PADRAO)
@@ -53,6 +54,7 @@ describe('Pessoas', () => {
 
     expect(result.body.token).toBeUndefined()
     expect(result.status).toBe(401)
+    done()
   })
 
   it('não deveria deletar o usuario pelo ID, porque não existe no banco', async () => {

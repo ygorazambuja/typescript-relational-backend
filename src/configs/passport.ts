@@ -1,24 +1,22 @@
-import * as passport from 'passport'
+import passport from 'passport'
 import { Strategy, ExtractJwt } from 'passport-jwt'
-const { authSecret } = require('../../.env')
+import knexInstance from './db'
 
-module.exports = app => {
-  const params = {
-    secretOrKey: authSecret,
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
-  }
-  const strategy = new Strategy(params, (payload, done) => {
-    app
-      .db('users')
-      .where({ id: payload.id })
-      .first()
-      .then(user => done(null, user ? { ...payload } : false))
-      .catch(err => done(err, false))
-  })
+const authSecret = process.env.AUTH_SECRET
 
-  passport.use(strategy)
-
-  return {
-    authenticate: () => passport.authenticate('jwt', { session: false })
-  }
+const opts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: authSecret
 }
+
+const strategy = new Strategy(opts, (payload, done) => {
+  knexInstance('pessoas')
+    .where({ id: payload.id })
+    .first()
+    .then(user => done(null, user ? { ...payload } : false))
+    .catch(err => done(err, false))
+})
+
+passport.use(strategy)
+
+export default () => passport.authenticate('jwt', { session: false })

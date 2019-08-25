@@ -35,4 +35,12 @@ describe('Testes com mensagens privadas, criptografando os emails', () => {
     expect(response.body).toBeInstanceOf(Array)
     expect(response.status).toBe(200)
   })
+  it('deveria me retornar a mensagem com o respectivo ID', async () => {
+    const response = await request(URL_PADRAO).get(`/message/${3}`)
+    expect(response.body).toBeInstanceOf(Object)
+    expect(response.body.id).toBeDefined()
+    expect(response.body.conteudo).toBeDefined()
+    expect(response.body.remetente).toBeDefined()
+    expect(response.status).toBe(200)
+  })
 })

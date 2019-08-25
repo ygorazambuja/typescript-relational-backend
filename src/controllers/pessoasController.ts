@@ -1,7 +1,6 @@
-import { Request, Response, response } from 'express'
+import { Request, Response } from 'express'
 import { genSaltSync, hashSync } from 'bcryptjs'
 import knexInstance from '../configs/db'
-import * as Knex from 'knex'
 
 const encryptPassword = password => {
   return hashSync(password, genSaltSync(10))

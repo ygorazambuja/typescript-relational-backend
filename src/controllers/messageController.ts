@@ -25,6 +25,17 @@ export async function PostMessage (request: Request, response: Response) {
 
 export async function GetMessages (request: Request, response: Response) {
   const Messages = await knexInstance('messages').select('*')
-
   return response.status(200).send(Messages)
+}
+
+export async function GetMessageById (request: Request, response: Response) {
+  knexInstance('messages')
+    .select('*')
+    .where({ id: request.params.id })
+    .then(result => {
+      return response.status(200).send(result[0])
+    })
+    .catch(err => {
+      return response.status(500).send(err)
+    })
 }
